@@ -8,40 +8,61 @@ import {
 
 export class LilypadNode implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Lilypad Node',
-		name: 'lilypadNode',
-		group: ['transform'],
+		displayName: 'Lilypad Job',
+		name: 'lilypadJob',
+		group: ['transform', 'output'],
 		version: 1,
-		description: 'Basic Lilypad Node',
+		description: 'Execute Lilypad job',
 		defaults: {
 			name: 'Lilypad Node',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
 		properties: [
-			// Node properties which the user gets displayed and
-			// can change on the node.
 			{
-				displayName: 'My String',
-				name: 'myString',
+				displayName: 'Module',
+				name: 'module',
 				type: 'string',
 				default: '',
-				placeholder: 'Placeholder value',
-				description: 'The description text',
+			},
+			{
+				displayName: 'Inputs',
+				name: 'inputs',
+				type: 'fixedCollection',
+				default: [],
+				typeOptions: {
+					multipleValues: true,
+				},
+				options: [
+					{
+						name: 'items',
+						displayName: 'Input',
+						values: [
+							{
+								displayName: 'Name',
+								name: 'name',
+								type: 'string',
+								default: '',
+								description: 'Custom input name',
+							},
+							{
+								displayName: 'Value',
+								name: 'value',
+								type: 'string',
+								default: '',
+								description: 'Custom input value',
+							},
+						],
+					},
+				],
 			},
 		],
 	};
 
-	// The function below is responsible for actually doing whatever this node
-	// is supposed to do. In this case, we're just appending the `myString` property
-	// with whatever the user has entered.
-	// You can make async calls and use `await`.
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
-
 		let item: INodeExecutionData;
 		let myString: string;
-
 		// Iterates over all input items and add the key "myString" with the
 		// value the parameter "myString" resolves to.
 		// (This could be a different value for each item in case it contains an expression)
