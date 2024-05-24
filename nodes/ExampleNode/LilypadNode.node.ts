@@ -6,15 +6,15 @@ import {
 	NodeOperationError,
 } from 'n8n-workflow';
 
-export class ExampleNode implements INodeType {
+export class LilypadNode implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Example Node',
-		name: 'exampleNode',
+		displayName: 'Lilypad Node',
+		name: 'lilypadNode',
 		group: ['transform'],
 		version: 1,
-		description: 'Basic Example Node',
+		description: 'Basic Lilypad Node',
 		defaults: {
-			name: 'Example Node',
+			name: 'Lilypad Node',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
