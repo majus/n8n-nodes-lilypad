@@ -33,7 +33,7 @@
       "dist/credentials/LilypadCredentialsApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/LilypadNode/LilypadNode.node.js"
+      "dist/nodes/LilypadJob/LilypadJob.node.js"
     ]
   },
   "devDependencies": {

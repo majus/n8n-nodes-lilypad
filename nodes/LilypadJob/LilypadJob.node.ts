@@ -6,15 +6,16 @@ import {
 	NodeOperationError,
 } from 'n8n-workflow';
 
-export class LilypadNode implements INodeType {
+export class LilypadJob implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Lilypad Job',
 		name: 'lilypadJob',
 		group: ['transform', 'output'],
 		version: 1,
 		description: 'Execute Lilypad job',
+		icon: 'file:lilypad.png',
 		defaults: {
-			name: 'Lilypad Node',
+			name: 'Lilypad Job',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
@@ -70,7 +71,6 @@ export class LilypadNode implements INodeType {
 			try {
 				myString = this.getNodeParameter('myString', itemIndex, '') as string;
 				item = items[itemIndex];
-
 				item.json['myString'] = myString;
 			} catch (error) {
 				// This node should never fail but we want to showcase how
@@ -91,7 +91,6 @@ export class LilypadNode implements INodeType {
 				}
 			}
 		}
-
 		return this.prepareOutputData(items);
 	}
 }
