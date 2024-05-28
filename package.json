@@ -37,6 +37,8 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.4",
+    "@types/node-fetch": "^2.6.11",
     "@typescript-eslint/parser": "~5.45",
     "eslint-plugin-n8n-nodes-base": "^1.11.0",
     "gulp": "^4.0.2",
@@ -46,5 +48,9 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "node-fetch": "^2.7.0"
   }
 }
