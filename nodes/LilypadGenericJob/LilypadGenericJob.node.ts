@@ -8,16 +8,16 @@ import {
 import { isObject } from 'lodash';
 import fetch from 'node-fetch';
 
-export class LilypadJob implements INodeType {
+export class LilypadGenericJob implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Lilypad Job',
-		name: 'lilypadJob',
+		displayName: 'Lilypad Generic Job',
+		name: 'lilypadGenericJob',
 		group: ['transform', 'output'],
 		version: 1,
-		description: 'Execute Lilypad job',
+		description: 'Execute custom Lilypad job',
 		icon: 'file:Lilypad.svg',
 		defaults: {
-			name: 'Lilypad Job',
+			name: 'Lilypad job',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
@@ -33,7 +33,7 @@ export class LilypadJob implements INodeType {
 				name: 'module',
 				type: 'string',
 				required: true,
-				default: 'ollama-pipeline:llama3-8b-lilypad1',
+				default: '',
 			},
 			{
 				displayName: 'Inputs',
