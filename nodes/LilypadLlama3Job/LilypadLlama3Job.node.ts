@@ -5,8 +5,8 @@ import {
 	INodeTypeDescription,
 	NodeOperationError,
 } from 'n8n-workflow';
-import { isObject, omitBy } from 'lodash';
-import fetch from 'node-fetch';
+import { omitBy } from 'lodash';
+import { queueLilypadJob, } from '../commons';
 
 export class LilypadLlama3Job implements INodeType {
 	description: INodeTypeDescription = {
@@ -232,7 +232,6 @@ export class LilypadLlama3Job implements INodeType {
 				const prompt = this.getNodeParameter('prompt', index, '') as string;
 				const format = this.getNodeParameter('format', index, '') as string;
 				const options = this.getNodeParameter('options', index, {}) as any;
-				const { key } = await this.getCredentials('lilypadCredentialsApi');
 				const inputs = {
 					'System': system,
 					'Prompt': prompt,
@@ -258,23 +257,7 @@ export class LilypadLlama3Job implements INodeType {
 						),
 					),
 				};
-				const response = await fetch('http://js-cli-wrapper.lilypad.tech', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({
-						pk: key,
-						module,
-						inputs: Object.entries(inputs).map(([name, value]) => {
-							const sanitized = value.replace(/'/g, '\\\'');
-							return `-i ${name}=$'${sanitized}'`;
-						}).join(' '),
-					}),
-				});
-				const json = await response.json();
-				if (json.error) {
-					const error = isObject(json.error) ? JSON.stringify(json.error) : json.error;
-					throw new NodeOperationError(this.getNode(), error);
-				}
+				const json = await queueLilypadJob(this, 'lilypadCredentialsApi', module, inputs);
 				outputs.push({ json });
 			} catch (error) {
 				if (this.continueOnFail()) {
