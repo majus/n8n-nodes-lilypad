@@ -1,6 +1,6 @@
 {
   "name": "@majus/n8n-nodes-lilypad",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "n8n nodes for Lilypad integration",
   "keywords": [
     "n8n-community-node-package"

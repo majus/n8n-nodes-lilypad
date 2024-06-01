@@ -16,13 +16,13 @@ export async function queueLilypadJob(node: IExecuteFunctions, credential: strin
 	const body = await node.helpers.request({
 		url: 'http://js-cli-wrapper.lilypad.tech',
 		method: 'POST',
-		// headers: { 'Content-Type': 'application/json' },
 		body: {
 			pk: key,
 			module,
 			inputs: serializeInputs(inputs),
 		},
 		json: true,
+		timeout: 1200000, // 20 minutes
 	});
 	if (body.error) {
 		const error = isObject(body.error) ? JSON.stringify(body.error) : body.error;
